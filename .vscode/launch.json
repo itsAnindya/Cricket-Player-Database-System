@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "FileOperations",
+            "request": "launch",
+            "mainClass": "FileOperations",
+            "projectName": "Cricket Player Database System_a0df30de"
+        },
+        {
+            "type": "java",
+            "name": "StudentList",
+            "request": "launch",
+            "mainClass": "StudentList",
+            "projectName": "Cricket Player Database System_a0df30de"
+        }
+    ]
+}

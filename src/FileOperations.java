@@ -5,7 +5,7 @@ import java.io.FileWriter;
 
 public class FileOperations {
 
-    private static final String INPUT_FILE_NAME = "resources/players.txt";
+    private static final String INPUT_FILE_NAME = "players.txt";
     private static final String OUTPUT_FILE_NAME = "out.txt";
 
     public static void main(String[] args) throws Exception {
