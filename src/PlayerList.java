@@ -92,34 +92,49 @@ class Player {
 
 public class PlayerList {
 
-    @SuppressWarnings("unused")
     List<Player> playerList = new ArrayList<>();
 
-    public void getPlayerListFromFile() throws Exception {
-    final String INPUT_FILE_NAME = "resource/players.txt";
-    try (BufferedReader br = new BufferedReader(new FileReader(INPUT_FILE_NAME))
-        
-
-    ) {
+    final void getPlayerListFromFile() throws Exception {
+        final String INPUT_FILE_NAME = "resource/players.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(INPUT_FILE_NAME))) {
             while (true) {
-            String line = br.readLine();
-            if (line == null) {
-                break;
+                String line = br.readLine();
+                if (line == null) {
+                    break;
+                }
+
+                Player p = new Player();
+                String[] playerInfos = line.split(",");
+                p.setName(playerInfos[0]);
+                p.setCountry(playerInfos[1]);
+                p.setAge(Integer.parseInt(playerInfos[2]));
+                p.setHeight(Double.parseDouble(playerInfos[3]));
+                p.setClub(playerInfos[4]);
+                p.setPosition(playerInfos[5]);
+                p.setJerseyNumber(Integer.parseInt(playerInfos[6]));
+                p.setSalary(Long.parseLong(playerInfos[7]));
+
+                playerList.add(p);
             }
-
-            Player p = new Player();
-            String[] playerInfos = line.split(",");
-            p.setName(playerInfos[0]);
-            p.setCountry(playerInfos[1]);
-            p.setAge(Integer.parseInt(playerInfos[2]));
-            p.setHeight(Double.parseDouble(playerInfos[3]));
-            p.setClub(playerInfos[4]);
-            p.setPosition(playerInfos[5]);
-            p.setJerseyNumber(Integer.parseInt(playerInfos[6]));
-            p.setSalary(Long.parseLong(playerInfos[7]));
-
-            playerList.add(p);
         }
     }
-}
+
+    public List<Player> searchByName(String searchStr) {
+        List<Player> searchResults = new ArrayList<>();
+        for (Player p : playerList) {
+            if (p.Name.trim().toLowerCase().contains(searchStr.trim().toLowerCase())) {
+                searchResults.add(p);
+            }
+        }
+
+        return searchResults;
+    }
+
+    public PlayerList() throws Exception {
+        getPlayerListFromFile();
+    }
+
+    public Player getPlayer(int i) {
+        return playerList.get(i);
+    }
 }
