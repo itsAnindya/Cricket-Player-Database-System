@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile Java",
+            "type": "shell",
+            "command": "javac",
+            "args": [
+                "-d", "${workspaceFolder}\\bin",  // specifies the output directory
+                "${workspaceFolder}\\src\\${fileBasenameNoExtension}.java",  // compiles the current Java file
+            ],
+            "detail": "Compiles the Java file and places the class files in the bin directory"
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "java",
+            "args": [
+                "-cp", "${workspaceFolder}\\bin",  // sets the classpath to the bin directory
+                "${fileBasenameNoExtension}",  // runs the compiled Java file (without extension)
+            ],
+            
+        },
+		{
+			"label": "Build and Run",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+            "dependsOn": ["Build", "Run"],
+			"dependsOrder": "sequence",
+            "detail": "Runs the compiled Java file from the bin directory"
+		}
+    ]
+}

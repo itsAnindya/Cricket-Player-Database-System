@@ -9,21 +9,24 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
+            "cwd": "${workspaceFolder}"
         },
         {
             "type": "java",
             "name": "FileOperations",
             "request": "launch",
             "mainClass": "FileOperations",
-            "projectName": "Cricket Player Database System_a0df30de"
+            "projectName": "Cricket Player Database System_a0df30de",
+            "cwd": "${workspaceFolder}"
         },
         {
             "type": "java",
             "name": "StudentList",
             "request": "launch",
             "mainClass": "StudentList",
-            "projectName": "Cricket Player Database System_a0df30de"
+            "projectName": "Cricket Player Database System_a0df30de",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
