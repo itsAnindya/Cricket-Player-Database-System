@@ -199,7 +199,7 @@ public class Menu {
                     System.out.print("Enter the club's name: ");
                     String clubName = input.nextLine();
 
-                    List<Player> maxWeeklySalaryInClub = Player.MaxWeeklySalaryInClub(clubName);
+                    List<Player> maxWeeklySalaryInClub = Player.MaxPaidPlayersInClub(clubName);
 
                     if (maxWeeklySalaryInClub.isEmpty()) {
                         System.out.println("\nNo such club with this name!\n");
@@ -262,7 +262,7 @@ public class Menu {
                         System.out.println("\nNo such club with this name!\n");
                     }
                     else {
-                        System.out.println("\nTotal salary of the club \"" + clubName + "\": " + totalSalary + "\n");
+                        System.out.println("\nTotal yearly salary of the club \"" + clubName + "\": " + totalSalary + "\n");
                     }
                 }
                 break;
@@ -284,7 +284,7 @@ public class Menu {
         //Checking for duplicate names.
         for (Player p : Player.PlayerList) {
             if (p.getName().trim().equalsIgnoreCase(name)) {
-                System.out.println("Player with this name already exists! Please choose another Name.");
+                System.out.println("Player with this name already exists! Please choose another name.\n");
                 return;
             }
         }
