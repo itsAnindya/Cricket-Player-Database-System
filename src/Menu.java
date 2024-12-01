@@ -44,7 +44,6 @@ public class Menu {
         int option;
         do {
             System.out.println("""
-                    
                     Player Searching Options:
                     (1) By Player Name
                     (2) By Club and Country
@@ -59,18 +58,20 @@ public class Menu {
                 case 1: {
                     //Search by player name.
                     List<Player> searchResults;
+
                     System.out.print("Enter the player's name: ");
                     String name = input.nextLine();
                     searchResults = Player.SearchByName(name);
+
                     if (searchResults.isEmpty()) { //If no player is found
                         System.out.println("\nPlayer not found!\n");
                     } else {
                         System.out.println("Search Results:\n");
                         Player.displaySearchResults(searchResults);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
-                return;
+                break;
                 case 2: {
                     //If the user chooses option (2), you should ask the user to input a country first and then ask the
                     //user to input a club. The user can input a club name (e.g., “Royal Challengers Bangalore”) or
@@ -93,7 +94,7 @@ public class Menu {
                     } else {
                         System.out.println("Search Results:\n");
                         Player.displaySearchResults(searchResults);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
                 break;
@@ -113,7 +114,7 @@ public class Menu {
                     } else {
                         System.out.println("Search Results:\n");
                         Player.displaySearchResults(searchResults);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
                 break;
@@ -147,7 +148,7 @@ public class Menu {
                     } else {
                         System.out.println("Search Results:\n");
                         Player.displaySearchResults(searchResults);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
                 break;
@@ -166,7 +167,7 @@ public class Menu {
                 }
                 break;
                 case 6: {
-                    System.out.println("Going back to Main Menu...\n");
+                    System.out.println("\n");
                     break;
                 }
                 default:
@@ -180,7 +181,6 @@ public class Menu {
         int option;
         do {
             System.out.println("""
-                    
                     Club Searching Options:
                     (1) Player(s) with the maximum salary of a club
                     (2) Player(s) with the maximum age of a club
@@ -201,13 +201,12 @@ public class Menu {
 
                     List<Player> maxWeeklySalaryInClub = Player.MaxWeeklySalaryInClub(clubName);
 
-                    if(maxWeeklySalaryInClub.isEmpty()) {
+                    if (maxWeeklySalaryInClub.isEmpty()) {
                         System.out.println("\nNo such club with this name!\n");
-                    }
-                    else {
+                    } else {
                         System.out.println("\nShowing the players with the maximum salary of the club \"" + clubName + "\":\n");
                         Player.displaySearchResults(maxWeeklySalaryInClub);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
                 break;
@@ -226,33 +225,49 @@ public class Menu {
                     } else {
                         System.out.println("\nShowing the oldest players of the club \"" + clubName + "\":\n");
                         Player.displaySearchResults(oldestPlayersInClub);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                     break;
                 }
-                case 3:{
+                case 3: {
                     //If the user chooses option (3), you should ask the user to input a club name and then search for
                     //the players with the maximum height. Display all information about these players if the club is
                     //found, or display “No such club with this name” if not found.
 
-                    System.out.println("Enter the club's name: ");
+                    System.out.print("Enter the club's name: ");
                     String clubName = input.nextLine();
 
                     List<Player> tallestPlayersInClub = Player.TallestPlayersInClub(clubName);
 
                     if (tallestPlayersInClub.isEmpty()) {
                         System.out.println("\nNo such club with this name!\n");
-                    }
-                    else {
+                    } else {
                         System.out.println("\nShowing the tallest players of the club \"" + clubName + "\":\n");
                         Player.displaySearchResults(tallestPlayersInClub);
-                        System.out.println();
+                        System.out.println("\n");
                     }
                 }
-                    break;
-                case 4:
-                    break;
+                break;
+                case 4: {
+                    //If the user chooses option (4), you should ask the user to input a club name and then find out
+                    //the total yearly salary of all the players of this club. Display the total salary for the club, or
+                    //display “No such club with this name” if not found.
+
+                    System.out.print("Enter the club's name: ");
+                    String clubName = input.nextLine();
+
+                    long totalSalary = Player.TotalSalary(clubName);
+
+                    if(totalSalary < 0) {
+                        System.out.println("\nNo such club with this name!\n");
+                    }
+                    else {
+                        System.out.println("\nTotal salary of the club \"" + clubName + "\": " + totalSalary + "\n");
+                    }
+                }
+                break;
                 case 5:
+                    System.out.println("\n");
                     break;
                 default:
                     break;
