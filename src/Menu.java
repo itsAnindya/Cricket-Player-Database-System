@@ -14,6 +14,7 @@ public class Menu {
             System.out.print("\nSelect an option (1-4): ");
             option = input.nextInt();
             input.nextLine();
+            System.out.println();
             switch (option) {
                 case 1: {
                     SearchPlayersMenu();
@@ -54,6 +55,7 @@ public class Menu {
             System.out.print("\nSelect an option (1-6): ");
             option = input.nextInt();
             input.nextLine();
+            System.out.println();
             switch (option) {
                 case 1: {
                     //Search by player name.
@@ -308,7 +310,7 @@ public class Menu {
         System.out.print("Enter the player's position: ");
         p.setPosition(input.nextLine().trim());
 
-        System.out.print("Enter the player's jersey number: ");
+        System.out.print("Enter the player's jersey number (Write -1 to leave it empty): ");
         p.setJerseyNumber(input.nextInt());
         input.nextLine();
 

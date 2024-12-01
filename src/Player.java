@@ -56,7 +56,7 @@ public class Player {
                         p.getHeight() + "," +
                         p.getClub() + "," +
                         p.getPosition() + "," +
-                        p.getJerseyNumber() + "," +
+                        (p.getJerseyNumber() < 0? "": p.getJerseyNumber()) + "," +
                         df.format(p.getSalary());
                 bw.write(line);
                 bw.newLine();
