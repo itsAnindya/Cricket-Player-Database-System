@@ -64,7 +64,7 @@ public class Player {
         }
     }
 
-    @org.jetbrains.annotations.NotNull
+    
     public static List<Player> SearchByName(String name) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : PlayerList) {
@@ -75,7 +75,7 @@ public class Player {
         return searchResults;
     }
 
-    public static @NotNull List<Player> SearchByCountryAndClub(String country, String club) {
+    public static List<Player> SearchByCountryAndClub(String country, String club) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : PlayerList) {
             if (p.getCountry().trim().equalsIgnoreCase(country.trim()) && (p.getClub().trim().equalsIgnoreCase(club.trim()) || club.equalsIgnoreCase("ANY"))) {
@@ -85,7 +85,7 @@ public class Player {
         return searchResults;
     }
 
-    public static @NotNull List<Player> SearchByPosition(String position) {
+    public static List<Player> SearchByPosition(String position) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : Player.PlayerList) {
             if (p.getPosition().trim().equalsIgnoreCase(position)) {
@@ -95,7 +95,7 @@ public class Player {
         return searchResults;
     }
 
-    public static @NotNull List<Player> SearchBySalaryRange(long lower, long upper) {
+    public static List<Player> SearchBySalaryRange(long lower, long upper) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : Player.PlayerList) {
             if (p.getSalary() >= lower && p.getSalary() <= upper) {
@@ -105,7 +105,7 @@ public class Player {
         return searchResults;
     }
 
-    public static @NotNull Map<String, Integer> CountryWisePlayerCount() {
+    public static Map<String, Integer> CountryWisePlayerCount() {
         Map<String, Integer> countryPlayerCountMap = new TreeMap<>();
         for (Player p : PlayerList) {
             countryPlayerCountMap.put(p.getCountry(), countryPlayerCountMap.getOrDefault(p.getCountry(), 0) + 1);
@@ -114,7 +114,7 @@ public class Player {
         return countryPlayerCountMap;
     }
 
-    public static @NotNull List<Player> MaxPaidPlayersInClub(String club) {
+    public static List<Player> MaxPaidPlayersInClub(String club) {
         List<Player> maxPaidPlayers = new ArrayList<>();
         long maxWeeklySalary = -1;
 
@@ -130,7 +130,7 @@ public class Player {
         return maxPaidPlayers;
     }
 
-    public static @NotNull List<Player> OldestPlayersInClub(String club) {
+    public static List<Player> OldestPlayersInClub(String club) {
         List<Player> oldestPlayers = new ArrayList<>();
         int maxAge = -1;
 
@@ -146,7 +146,7 @@ public class Player {
         return oldestPlayers;
     }
 
-    public static @NotNull List<Player> TallestPlayersInClub(String club) {
+    public static List<Player> TallestPlayersInClub(String club) {
         List<Player> tallestPlayers = new ArrayList<>();
         double maxHeight = -1;
 
@@ -205,7 +205,7 @@ public class Player {
     }
 
     //Console-based function
-    public static void displaySearchResults(@NotNull List<Player> playerList) {
+    public static void displaySearchResults(List<Player> playerList) {
         int i = 0;
         for (Player p : playerList) {
             System.out.printf("Result %02d out of %02d:\n", ++i, playerList.size());
