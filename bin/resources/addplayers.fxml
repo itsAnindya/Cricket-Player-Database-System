@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+ <VBox alignment="CENTER" prefHeight="353.0" prefWidth="494.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AddPlayersController">
+     <Label lineSpacing="20.0" text="নতুন প্লেয়ারের সম্পর্কে তথ্য দিন" textAlignment="CENTER" underline="true">
+         <font>
+             <Font name="Kalpurush" size="18.0" />
+         </font>
+     </Label>
+     <GridPane alignment="CENTER" prefHeight="238.0" prefWidth="470.0" VBox.vgrow="ALWAYS">
+         <columnConstraints>
+             <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="102.800048828125" minWidth="10.0" prefWidth="20.0" />
+             <ColumnConstraints hgrow="ALWAYS" maxWidth="102.800048828125" minWidth="10.0" prefWidth="63.20002822875976" />
+             <ColumnConstraints hgrow="ALWAYS" maxWidth="194.79998779296875" minWidth="10.0" prefWidth="163.19998779296876" />
+             <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="194.79998779296875" minWidth="10.0" prefWidth="28.200048828124977" />
+             <ColumnConstraints hgrow="ALWAYS" maxWidth="117.4000244140625" minWidth="10.0" prefWidth="84.199951171875" />
+             <ColumnConstraints hgrow="ALWAYS" maxWidth="178.0" minWidth="10.0" prefWidth="157.600048828125" />
+         </columnConstraints>
+         <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <Label text="নাম:" GridPane.columnIndex="1">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="দেশ:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="বয়স:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="উচ্চতা:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <TextField id="nameField" fx:id="nameField" promptText="Name" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS">
+             <cursor>
+                 <Cursor fx:constant="TEXT" />
+             </cursor>
+         </TextField>
+         <TextField id="countryField" fx:id="countryField" promptText="Country" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+         <TextField id="ageField" fx:id="ageField" promptText="Age in years" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+         <TextField id="heightField" fx:id="heightField" promptText="Height in meters" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+         <Label text="ক্লাব:" GridPane.columnIndex="4">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="অবস্থান:" GridPane.columnIndex="4" GridPane.rowIndex="1">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="জার্সি নাম্বার:" GridPane.columnIndex="4" GridPane.rowIndex="2">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <Label text="সাপ্তাহিক বেতন:" GridPane.columnIndex="4" GridPane.rowIndex="3">
+             <font>
+                 <Font name="Kalpurush" size="12.0" />
+             </font>
+         </Label>
+         <TextField id="clubField" fx:id="clubField" promptText="Club name" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" />
+         <TextField id="positionField" fx:id="positionField" prefHeight="26.0" prefWidth="151.0" promptText="Example: &quot;Wicketkeeper&quot;" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+         <TextField id="jerseyField" fx:id="jerseyField" promptText="Jersey number" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+         <TextField id="salaryField" fx:id="salaryField" promptText="Weekly salary in USD" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+         <Label text="*" textAlignment="RIGHT" textFill="RED" GridPane.halignment="RIGHT">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label text="*" textAlignment="RIGHT" textFill="RED" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label text="*" textAlignment="RIGHT" textFill="RED" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label layoutX="8.0" layoutY="150.0" text="*" textAlignment="RIGHT" textFill="RED" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label layoutX="8.0" layoutY="32.0" text="*" textAlignment="RIGHT" textFill="RED" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label layoutX="8.0" layoutY="32.0" text="*" textAlignment="RIGHT" textFill="RED" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+         <Label layoutX="8.0" layoutY="32.0" text="*" textAlignment="RIGHT" textFill="RED" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+             <font>
+                 <Font size="10.0" />
+             </font>
+         </Label>
+     </GridPane>
+   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="494.0" VBox.vgrow="ALWAYS">
+      <children>
+         <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="430.0" HBox.hgrow="ALWAYS">
+            <children>
+                <Button mnemonicParsing="false" onMouseClicked="#backButtonClicked" prefHeight="26.0" prefWidth="142.0" text="&lt; পূর্বের মেনুতে ফিরে যান">
+                    <font>
+                        <Font name="Kalpurush" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="426.0" HBox.hgrow="ALWAYS">
+            <children>
+                <Button fx:id="saveButton" mnemonicParsing="false" onMouseClicked="#saveButtonClicked" text="সংরক্ষণ করুন">
+                    <font>
+                        <Font name="Kalpurush" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+         </HBox>
+      </children>
+   </HBox>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+ </VBox>

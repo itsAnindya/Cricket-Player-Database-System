@@ -1,0 +1,209 @@
+/* General Styling for Dark Mode */
+.root {
+    -fx-background-color: #2b2b2b;
+    -fx-font-family: 'Kalpurush', sans-serif;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Styling for MenuBar */
+.menu-bar {
+    -fx-background-color: #3c3f41;
+    -fx-border-color: #1e1e1e;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Styling for Menu */
+.menu {
+    -fx-text-fill: #e0e0e0;
+}
+
+.menu:hover {
+    -fx-background-color: #505355;
+}
+
+/* Styling for MenuItems */
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e0;
+}
+
+.menu-item:hover {
+    -fx-background-color: #505355;
+    -fx-text-fill: #ffffff;
+}
+
+/* Styling for Labels */
+.label {
+    -fx-font-family: 'Kalpurush', sans-serif; /* Set font to Kalpurush */
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 5px 0px;
+}
+
+.title {
+    -fx-font-family: 'Kalpurush', sans-serif;
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 5px 10px;
+}
+
+/* Styling for Buttons */
+.button {
+    -fx-background-color: #3c3f41, linear-gradient(#45494a, #2b2b2b);
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #606060;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#505355, #3c3f41);
+    -fx-border-color: #ffffff;
+}
+
+/* Styling for ComboBox */
+.combo-box {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box:hover {
+    -fx-border-color: #ffffff;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #505355;
+    -fx-text-fill: #ffffff;
+}
+
+/* Styling for RadioButton */
+.radio-button {
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button:selected {
+    -fx-mark-color: #ffab40;
+}
+
+/* Dark Mode CSS for JavaFX Alert and DialogPane */
+.dialog-pane {
+    -fx-background-color: #121212; /* Dark background */
+    -fx-border-color: #333333;     /* Slightly lighter border for contrast */
+    -fx-padding: 20px;
+    -fx-font-family: "Kalpurush", sans-serif;
+    -fx-text-fill: #e0e0e0;  /* Light text for contrast */
+}
+
+/* Title Text Styling */
+.dialog-pane .header-panel {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+
+/* Button Styling */
+.dialog-pane .button-bar .button {
+    -fx-background-color: #333333;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555555;
+    -fx-padding: 8px 16px;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #444444;
+    -fx-text-fill: #ffffff;
+}
+
+.dialog-pane .button-bar .button:pressed {
+    -fx-background-color: #222222;
+    -fx-text-fill: #ffffff;
+}
+
+/* Content Area Styling */
+.dialog-pane .content {
+    -fx-background-color: #121212;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* ScrollPane (if present in alert) */
+.dialog-pane .content Label {
+    -fx-text-fill: #e0e0e0;
+}
+
+
+
+/* Tooltip Styling */
+.tooltip {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #606060;
+}
+
+/* TextField styles */
+.text-field {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 4 8;
+    -fx-border-color: #555;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+.text-field:focused {
+    -fx-border-color: #888;
+    -fx-background-color: #444;
+}
+
+/* Fix for the tab header area (the top part) */
+.tab-pane .tab-header-area {
+    -fx-background-color: #1e1e1e;  /* Dark background */
+    -fx-border-color: #333;
+}
+
+/* Fix for the entire content area of the TabPane */
+.tab-pane .tab-content-area {
+    -fx-background-color: #121212;  /* Match dark mode */
+    -fx-border-color: #333;
+}
+
+/* Styling the tabs for better contrast and readability */
+.tab {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #e0e0e0; /* Light gray text for contrast */
+    -fx-font-size: 14px;  /* Slightly larger font for readability */
+    -fx-font-weight: bold;
+    -fx-padding: 8px;
+    -fx-border-color: #333;
+}
+
+/* Selected tab styling for better visibility */
+.tab:selected {
+    -fx-background-color: #292929;
+    -fx-text-fill: #ffffff; /* Pure white for high contrast */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-border-color: #4a90e2; /* Accent color for visibility */
+}
+
+/* Tooltips and general text styling inside the tab content */
+.tab-pane .label {
+    -fx-text-fill: #e0e0e0; /* Light gray text for readability */
+    -fx-font-size: 14px;
+}
+
+.tab-pane .button {
+    -fx-background-color: #333;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #4a90e2;
+    -fx-border-radius: 5;
+    -fx-padding: 8px;
+}

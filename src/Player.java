@@ -1,24 +1,35 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class Player {
-
+public class Player implements Serializable {
+    
     String Name, Country, Club, Position;
     int age, jerseyNumber;
     double height;
     long salary;
-
+    
     public static List<Player> PlayerList = new ArrayList<>();
-
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Player player = (Player) obj;
+        return Objects.equals(Name, player.Name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(Name);
+    }
+    
     public static void readPlayerListFromFile(String filePath) throws Exception {
         File inputFile = new File(filePath);
         if (!inputFile.exists()) {
             throw new FileNotFoundException("File not found: " + filePath);
         }
-
+        
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
             String line;
             String[] playerInfos;
@@ -33,21 +44,21 @@ public class Player {
                 p.setPosition(playerInfos[5]);
                 p.setJerseyNumber(playerInfos[6].isEmpty() ? -1 : Integer.parseInt(playerInfos[6]));
                 p.setSalary(Long.parseLong(playerInfos[7]));
-
+                
                 PlayerList.add(p);
             }
         }
     }
-
+    
     public static void writePlayerListToFile(String filePath) throws Exception {
         File outputFile = new File(filePath); // File object for "resources/players.txt"
         if (!outputFile.exists()) {
             outputFile.createNewFile(); // Create the file if it doesn't exist
         }
-
+        
         DecimalFormat df = new DecimalFormat("#");
         String line;
-
+        
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))) {
             for (Player p : PlayerList) {
                 line = p.getName() + "," +
@@ -56,14 +67,14 @@ public class Player {
                         p.getHeight() + "," +
                         p.getClub() + "," +
                         p.getPosition() + "," +
-                        (p.getJerseyNumber() < 0? "": p.getJerseyNumber()) + "," +
+                        p.getJerseyNumber() + "," +
                         df.format(p.getSalary());
                 bw.write(line);
                 bw.newLine();
             }
         }
     }
-
+    
     
     public static List<Player> SearchByName(String name) {
         List<Player> searchResults = new ArrayList<>();
@@ -74,17 +85,18 @@ public class Player {
         }
         return searchResults;
     }
-
+    
     public static List<Player> SearchByCountryAndClub(String country, String club) {
         List<Player> searchResults = new ArrayList<>();
+        String defaultName = "ANY";
         for (Player p : PlayerList) {
-            if (p.getCountry().trim().equalsIgnoreCase(country.trim()) && (p.getClub().trim().equalsIgnoreCase(club.trim()) || club.equalsIgnoreCase("ANY"))) {
+            if ((p.getCountry().trim().equalsIgnoreCase(country.trim()) || country.trim().equalsIgnoreCase(defaultName)) && (p.getClub().trim().equalsIgnoreCase(club.trim()) || club.equalsIgnoreCase(defaultName))) {
                 searchResults.add(p);
             }
         }
         return searchResults;
     }
-
+    
     public static List<Player> SearchByPosition(String position) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : Player.PlayerList) {
@@ -94,7 +106,7 @@ public class Player {
         }
         return searchResults;
     }
-
+    
     public static List<Player> SearchBySalaryRange(long lower, long upper) {
         List<Player> searchResults = new ArrayList<>();
         for (Player p : Player.PlayerList) {
@@ -104,20 +116,20 @@ public class Player {
         }
         return searchResults;
     }
-
+    
     public static Map<String, Integer> CountryWisePlayerCount() {
         Map<String, Integer> countryPlayerCountMap = new TreeMap<>();
         for (Player p : PlayerList) {
             countryPlayerCountMap.put(p.getCountry(), countryPlayerCountMap.getOrDefault(p.getCountry(), 0) + 1);
         }
-
+        
         return countryPlayerCountMap;
     }
-
+    
     public static List<Player> MaxPaidPlayersInClub(String club) {
         List<Player> maxPaidPlayers = new ArrayList<>();
         long maxWeeklySalary = -1;
-
+        
         for (Player p : PlayerList) {
             if (p.getSalary() > maxWeeklySalary && p.getClub().trim().equalsIgnoreCase(club.trim())) {
                 maxPaidPlayers.clear();
@@ -129,11 +141,11 @@ public class Player {
         }
         return maxPaidPlayers;
     }
-
+    
     public static List<Player> OldestPlayersInClub(String club) {
         List<Player> oldestPlayers = new ArrayList<>();
         int maxAge = -1;
-
+        
         for (Player p : PlayerList) {
             if (p.getAge() > maxAge && p.getClub().trim().equalsIgnoreCase(club.trim())) {
                 oldestPlayers.clear();
@@ -145,11 +157,11 @@ public class Player {
         }
         return oldestPlayers;
     }
-
+    
     public static List<Player> TallestPlayersInClub(String club) {
         List<Player> tallestPlayers = new ArrayList<>();
         double maxHeight = -1;
-
+        
         for (Player p : PlayerList) {
             if (p.getHeight() > maxHeight && p.getClub().trim().equalsIgnoreCase(club.trim())) {
                 tallestPlayers.clear();
@@ -161,7 +173,7 @@ public class Player {
         }
         return tallestPlayers;
     }
-
+    
     public static long TotalSalary(String club) {
         long totalSalary = -1;
         for (Player p : PlayerList) {
@@ -175,10 +187,10 @@ public class Player {
         }
         return totalSalary * 52;
     }
-
+    
     public Player() {
     }
-
+    
     public Player(String Name, String Country, int age, double height, String Club, String Position, int jerseyNumber, long salary) {
         this.Name = Name;
         this.Country = Country;
@@ -189,7 +201,7 @@ public class Player {
         this.jerseyNumber = jerseyNumber;
         this.salary = salary;
     }
-
+    
     //Console-based function
     public void display() {
         System.out.println("Name: " + Name);
@@ -203,7 +215,7 @@ public class Player {
         }
         System.out.println("Salary: " + salary + "\n");
     }
-
+    
     //Console-based function
     public static void displaySearchResults(List<Player> playerList) {
         int i = 0;
@@ -212,67 +224,67 @@ public class Player {
             p.display();
         }
     }
-
+    
     public String getName() {
         return Name;
     }
-
+    
     public String getCountry() {
         return Country;
     }
-
+    
     public String getClub() {
         return Club;
     }
-
+    
     public String getPosition() {
         return Position;
     }
-
+    
     public int getAge() {
         return age;
     }
-
-    public int getJerseyNumber() {
-        return jerseyNumber;
+    
+    public String getJerseyNumber() {
+        return (jerseyNumber < 0) ? "" : ("" + jerseyNumber);
     }
-
+    
     public double getHeight() {
         return height;
     }
-
+    
     public long getSalary() {
         return salary;
     }
-
+    
     public void setName(String Name) {
         this.Name = Name;
     }
-
+    
     public void setCountry(String Country) {
         this.Country = Country;
     }
-
+    
     public void setClub(String Club) {
         this.Club = Club;
     }
-
+    
     public void setPosition(String Position) {
         this.Position = Position;
     }
-
+    
     public void setAge(int age) {
         this.age = age;
     }
-
+    
     public void setJerseyNumber(int jerseyNumber) {
         this.jerseyNumber = jerseyNumber;
     }
-
+    
     public void setHeight(double height) {
         this.height = height;
     }
-
+    
     public void setSalary(long salary) {
         this.salary = salary;
     }

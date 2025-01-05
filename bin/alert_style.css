@@ -1,0 +1,9 @@
+.dialog-pane {
+    -fx-font-family: "Kalpurush"; /* Change font family */
+    -fx-font-size: 12px;      /* Change font size */
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #2a2a2a; /* Text color */
+    -fx-font-weight: bold;  /* Make the text bold */
+}

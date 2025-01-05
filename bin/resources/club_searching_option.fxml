@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClubSearchingOption">
+   <VBox alignment="CENTER" layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+      <padding>
+         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+      </padding>
+      <Label alignment="TOP_CENTER" prefHeight="255.0" prefWidth="560.0" text="ক্লাব সার্চের অপশন" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="Kalpurush" size="24.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+         <HBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="437.0" spacing="20.0">
+               <Label text="যেকোনো একটি অপশন নির্বাচন করুন:">
+                  <font>
+                     <Font name="Kalpurush" size="14.0" />
+                  </font>
+               </Label>
+               <RadioButton fx:id="maxSalary" mnemonicParsing="false" text="ক্লাবের সর্বোচ্চ বেতনের খেলোয়াড়">
+                  <font>
+                     <Font name="Kalpurush" size="12.0" />
+                  </font>
+               </RadioButton>
+               <RadioButton fx:id="maxAge" mnemonicParsing="false" text="ক্লাবের সবথেকে বয়স্ক খেলোয়াড়">
+                  <font>
+                     <Font name="Kalpurush" size="12.0" />
+                  </font>
+               </RadioButton>
+               <RadioButton fx:id="maxHeight" mnemonicParsing="false" text="ক্লাবের সর্বোচ্চ উচ্চতার খেলোয়াড়">
+                  <font>
+                     <Font name="Kalpurush" size="12.0" />
+                  </font>
+               </RadioButton>
+               <RadioButton fx:id="totalYearlyIncome" mnemonicParsing="false" text="ক্লাবের মোট বার্ষিক বেতন">
+                  <font>
+                     <Font name="Kalpurush" size="12.0" />
+                  </font>
+               </RadioButton>
+            </VBox>
+         </HBox>
+         <HBox alignment="CENTER_RIGHT" prefHeight="130.0" prefWidth="321.0">
+            <VBox alignment="TOP_RIGHT" spacing="20.0">
+               <HBox>
+                  <children>
+                     <Label text="ক্লাব নির্বাচন করুন:">
+                        <font>
+                           <Font name="Kalpurush" size="14.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <ComboBox fx:id="clubsComboBox" prefWidth="272.0" promptText="ক্লাবের নাম" stylesheets="@style.css" />
+            </VBox>
+         </HBox>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="278.0" prefWidth="560.0" VBox.vgrow="ALWAYS">
+         <HBox alignment="BOTTOM_LEFT" prefHeight="186.0" prefWidth="363.0" HBox.hgrow="ALWAYS">
+            <Button mnemonicParsing="false" onMouseClicked="#backButtonClicked" text="&lt; পূর্ববর্তী মেনুতে ফেরত যান">
+               <font>
+                  <Font name="Kalpurush" size="12.0" />
+               </font>
+            </Button>
+         </HBox>
+         <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="406.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextPageButtonClicked" text="পরবর্তীতে যান &gt;">
+               <font>
+                  <Font name="Kalpurush" size="12.0" />
+               </font>
+            </Button>
+         </HBox>
+      </HBox>
+   </VBox>
+</AnchorPane>
