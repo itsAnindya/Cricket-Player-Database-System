@@ -108,6 +108,7 @@ public class ReadThreadServer implements Runnable {
             if (playerUpdated) {
 //                socketWrapper.write("SEND_ALL_PLAYERS_LIST");
 //                socketWrapper.write(allPlayersList);
+//                Player.PlayerList = allPlayersList;
                 for (Player player : allPlayersList) {
                     System.out.println(player.getName() + ", " + player.getClub());
                 }
@@ -138,6 +139,7 @@ public class ReadThreadServer implements Runnable {
             }
             if (playerUpdated) {
                 System.out.println("PLAYER UPDATED IN SERVER");
+//                Player.PlayerList = allPlayersList;
             } else {
                 System.err.println("PLAYER COULD NOT BE UPDATED IN SERVER");
             }
