@@ -29,31 +29,29 @@
                 <VBox>
                     <HBox alignment="CENTER">
                         <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                         </VBox.margin>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="বিক্রয়যোগ্য খেলোয়াড়দের তালিকা"
-                               textAlignment="CENTER"/>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="বিক্রয়যোগ্য খেলোয়াড়দের তালিকা" textAlignment="CENTER" />
                     </HBox>
                     <TableView fx:id="sellTable" prefHeight="264.0" prefWidth="560.0" VBox.vgrow="SOMETIMES">
                         <columns>
-                            <TableColumn fx:id="nameColumn_sell" prefWidth="106.4000244140625" text="নাম"/>
-                            <TableColumn fx:id="heightColumn_sell" prefWidth="66.39996337890625" text="উচ্চতা"/>
-                            <TableColumn fx:id="ageColumn_sell" prefWidth="69.5999755859375" text="বয়স"/>
-                            <TableColumn fx:id="countryColumn_sell" prefWidth="83.99993896484375" text="দেশ"/>
-                            <TableColumn fx:id="positionColumn_sell" prefWidth="92.79998779296875" text="অবস্থান"/>
+                            <TableColumn fx:id="nameColumn_sell" prefWidth="106.4000244140625" text="নাম" />
+                            <TableColumn fx:id="heightColumn_sell" prefWidth="66.39996337890625" text="উচ্চতা" />
+                            <TableColumn fx:id="ageColumn_sell" prefWidth="69.5999755859375" text="বয়স" />
+                            <TableColumn fx:id="countryColumn_sell" prefWidth="83.99993896484375" text="দেশ" />
+                            <TableColumn fx:id="positionColumn_sell" prefWidth="92.79998779296875" text="অবস্থান" />
                         </columns>
                     </TableView>
                     <HBox prefHeight="0.0" prefWidth="560.0">
                         <VBox.margin>
-                            <Insets top="20.0"/>
+                            <Insets top="20.0" />
                         </VBox.margin>
-                        <HBox alignment="BOTTOM_LEFT">
-                            <Button mnemonicParsing="false" text="লগ আউট" fx:id="logOutButton"
-                                    onAction="#logOutAction"/>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="525.0" spacing="30.0">
+                            <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOutAction" text="লগ আউট" />
+                     <Button onAction="#handleRefresh" mnemonicParsing="false" text="রিফ্রেশ করুন" />
                         </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="6.0" prefWidth="494.0"
-                              HBox.hgrow="ALWAYS">
-                            <Button onAction="#sellPlayer" fx:id="sellPlayerButton" mnemonicParsing="false" text="বিক্রয় করুন"/>
+                        <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="494.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                            <Button fx:id="sellPlayerButton" mnemonicParsing="false" onAction="#sellPlayer" text="বিক্রয় করুন" />
                         </HBox>
                     </HBox>
                 </VBox>
@@ -62,30 +60,29 @@
                 <VBox>
                     <HBox alignment="CENTER">
                         <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                         </VBox.margin>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="ক্রয়যোগ্য খেলোয়াড়দের তালিকা"
-                               textAlignment="CENTER"/>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="ক্রয়যোগ্য খেলোয়াড়দের তালিকা" textAlignment="CENTER" />
                     </HBox>
                     <TableView fx:id="buyTable" prefHeight="223.0" prefWidth="560.0" VBox.vgrow="SOMETIMES">
                         <columns>
-                            <TableColumn fx:id="nameColumn_sold" prefWidth="106.4000244140625" text="নাম"/>
-                            <TableColumn fx:id="heightColumn_sold" prefWidth="66.39996337890625" text="উচ্চতা"/>
-                            <TableColumn fx:id="ageColumn_sold" prefWidth="69.5999755859375" text="বয়স"/>
-                            <TableColumn fx:id="countryColumn_sold" prefWidth="83.99993896484375" text="দেশ"/>
-                            <TableColumn fx:id="positionColumn_sold" prefWidth="89.60003662109375" text="অবস্থান"/>
+                            <TableColumn fx:id="nameColumn_sold" prefWidth="106.4000244140625" text="নাম" />
+                            <TableColumn fx:id="heightColumn_sold" prefWidth="66.39996337890625" text="উচ্চতা" />
+                            <TableColumn fx:id="ageColumn_sold" prefWidth="69.5999755859375" text="বয়স" />
+                            <TableColumn fx:id="countryColumn_sold" prefWidth="83.99993896484375" text="দেশ" />
+                            <TableColumn fx:id="positionColumn_sold" prefWidth="89.60003662109375" text="অবস্থান" />
                         </columns>
                     </TableView>
                     <HBox prefHeight="0.0" prefWidth="560.0">
                         <VBox.margin>
-                            <Insets top="20.0"/>
+                            <Insets top="20.0" />
                         </VBox.margin>
-                        <HBox alignment="BOTTOM_LEFT">
-                            <Button onAction="#logOutAction" mnemonicParsing="false" text="লগ আউট"/>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="506.0" spacing="30.0">
+                            <Button mnemonicParsing="false" onAction="#logOutAction" text="লগ আউট" />
+                     <Button onAction="#handleRefresh" mnemonicParsing="false" text="রিফ্রেশ করুন" />
                         </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="6.0" prefWidth="494.0"
-                              HBox.hgrow="ALWAYS">
-                            <Button onAction="#buyPlayer" fx:id="buyPlayerButton" mnemonicParsing="false" text="ক্রয় করুন"/>
+                        <HBox alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="494.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                            <Button fx:id="buyPlayerButton" mnemonicParsing="false" onAction="#buyPlayer" text="ক্রয় করুন" />
                         </HBox>
                     </HBox>
                 </VBox>

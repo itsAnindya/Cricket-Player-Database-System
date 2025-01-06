@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +17,10 @@ public class ClubManagementClient {
     ReadThread readThread;
     private List<Player> allPlayers;
     private ClubManagementHomepage clubManagementHomepage;
+    
+    public ClubManagementHomepage getClubManagementHomepage() {
+        return clubManagementHomepage;
+    }
     
     public void setAllPlayers(List<Player> allPlayers) {
         this.allPlayers = allPlayers;
@@ -112,14 +114,8 @@ public class ClubManagementClient {
         stage.show();
     }
     
-    public void refreshTables() {
-        Platform.runLater(() -> {
-            // Assuming you have a TableView<Player> in the client class named playersTable
-            if (clubManagementHomepage != null) {
-                clubManagementHomepage.sellTable.setItems(FXCollections.observableArrayList(allPlayers));
-                clubManagementHomepage.sellTable.refresh();  // Ensures the table UI is fully refreshed}
-            }
-        });
+    public void refreshTables() throws IOException {
+        clubManagementHomepage.tableRefresh();
     }
     
 }

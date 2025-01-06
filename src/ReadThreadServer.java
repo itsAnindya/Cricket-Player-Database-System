@@ -71,26 +71,26 @@ public class ReadThreadServer implements Runnable {
             System.err.println("Error writing LoginDTO to socket: " + e.getMessage());
         }
     }
+
+//    private void handleStringRequest(String requestStr) throws IOException {
+//        switch (requestStr) {
+//            case "DISCONNECT" -> {
+//                System.out.println("Disconnected: " + socketWrapper.getSocket().getInetAddress());
+//                stopThread(); // Stop thread on disconnect
+//            }
+//            case "REQUEST_ALL_PLAYERS_LIST" -> {
+//                try {
+//                    socketWrapper.write("SEND_ALL_PLAYERS_LIST");
+//                    socketWrapper.write(allPlayersList);
+//                } catch (IOException e) {
+//                    System.err.println("Error sending player list: " + e.getMessage());
+//                }
+//            }
+//            default -> handlePlayerMarketplace(requestStr);
+//        }
+//    }
     
     private void handleStringRequest(String requestStr) throws IOException {
-        switch (requestStr) {
-            case "DISCONNECT" -> {
-                System.out.println("Disconnected: " + socketWrapper.getSocket().getInetAddress());
-                stopThread(); // Stop thread on disconnect
-            }
-            case "REQUEST_ALL_PLAYERS_LIST" -> {
-                try {
-                    socketWrapper.write("SEND_ALL_PLAYERS_LIST");
-                    socketWrapper.write(allPlayersList);
-                } catch (IOException e) {
-                    System.err.println("Error sending player list: " + e.getMessage());
-                }
-            }
-            default -> handlePlayerMarketplace(requestStr);
-        }
-    }
-    
-    private void handlePlayerMarketplace(String requestStr) throws IOException {
         if (requestStr.startsWith("SELL_PLAYER, ")) {
             String playerName = requestStr.split(", ")[1];
             boolean playerUpdated = false;
@@ -98,21 +98,59 @@ public class ReadThreadServer implements Runnable {
                 for (Player player : allPlayersList) {
                     if (player.getName().trim().equalsIgnoreCase(playerName.trim()) && !"MARKETPLACE".equals(player.getClub())) {
                         player.setClub("MARKETPLACE");
+                        socketWrapper.write("PLAYER_SOLD");
+                        socketWrapper.write(player);
                         playerUpdated = true;
                         break;
                     }
                 }
             }
             if (playerUpdated) {
-                socketWrapper.write("SEND_ALL_PLAYERS_LIST");
-                socketWrapper.write(allPlayersList);
+//                socketWrapper.write("SEND_ALL_PLAYERS_LIST");
+//                socketWrapper.write(allPlayersList);
                 for (Player player : allPlayersList) {
-                    System.out.println(player.getClub());
+                    System.out.println(player.getName() + ", " + player.getClub());
                 }
 //                socketWrapper.write("SELL_PLAYER_SUCCESS");
             } else {
-                socketWrapper.write("PLAYER_ALREADY_IN_MARKETPLACE");
+                socketWrapper.write("PLAYER COULD NOT BE UPDATED IN SERVER");
             }
+        } else if ("REQUEST_ALL_PLAYERS_LIST".equals(requestStr)) {
+            try {
+                socketWrapper.write("SEND_ALL_PLAYERS_LIST");
+                socketWrapper.write(allPlayersList);
+            } catch (IOException e) {
+                System.err.println("Error sending player list: " + e.getMessage());
+            }
+        } else if (requestStr.startsWith("BUY_PLAYER, ")) {
+            String playerName = requestStr.split(", ")[1];
+            String clubName = requestStr.split(", ")[2];
+            boolean playerUpdated = false;
+            synchronized (allPlayersList) {
+                for (Player player : allPlayersList) {
+                    if (player.getName().trim().equalsIgnoreCase(playerName.trim()) && "MARKETPLACE".equals(player.getClub())) {
+                        player.setClub(clubName);
+                        socketWrapper.write("SERVER: PLAYER_BOUGHT, " + playerName + ", " + clubName);
+                        playerUpdated = true;
+                        break;
+                    }
+                }
+            }
+            if (playerUpdated) {
+                System.out.println("PLAYER UPDATED IN SERVER");
+            } else {
+                System.err.println("PLAYER COULD NOT BE UPDATED IN SERVER");
+            }
+        } else if ("CLIENT: REQUESTED_REFRESH".equals(requestStr)) {
+            socketWrapper.write("SERVER: REQUESTED_REFRESH_ACCEPTED");
+            sendPlayerListToClient();
+        }
+    }
+    
+    private void sendPlayerListToClient() throws IOException {
+        synchronized (allPlayersList) {
+            Object[] response = {"SERVER: REQUESTED_REFRESH_ACCEPTED", allPlayersList};
+            socketWrapper.write(response);
         }
     }
     

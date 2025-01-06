@@ -6,15 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClubManagementHomepage {
     public TableColumn<Player, String> nameColumn_sell;
@@ -78,29 +77,108 @@ public class ClubManagementHomepage {
         positionColumnSell.setCellValueFactory(new PropertyValueFactory<>("position"));
     }
     
+    public void tableRefresh() throws IOException {
+        Platform.runLater(() -> {
+            try {
+                loadClubPlayers(clubName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                loadSoldPlayers();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            sellTable.refresh();
+            buyTable.refresh();
+        });
+    }
+    
+    public void failedOperationAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        ButtonType customButton = new ButtonType("ঠিক আছে");
+        alert.getButtonTypes().setAll(customButton);
+        alert.setTitle("Requested Operation Failed");
+        alert.setHeaderText("এই মুহূর্তে অনুরোধটি বাস্তবায়ন সম্ভব নয়");
+        alert.setContentText("অনুগ্রহ করে পেজটি রিফ্রেশ করে পুনারায় চেষ্টা করুন।");
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("nord-dark.css")).toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        alert.showAndWait();
+    }
+    
     @FXML
     private void sellPlayer() {
-        System.out.println("sellPlayer");
-        Player player = sellTable.getSelectionModel().getSelectedItem();
-        try {
-            clubManagementClient.getSocketWrapper().write("SELL_PLAYER, " + player.getName());
-            System.out.println("SELL PLAYER, " + player.getName() + " MESSAGE SENT");
-            Platform.runLater(() -> {
+//        System.out.println("sellPlayer");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Sale");
+        alert.setHeaderText("বিক্রয় নিশ্চিত করুন");
+        alert.setContentText("আপনি কি " + sellTable.getSelectionModel().getSelectedItem().getName() + " কে বিক্রয় করতে চান?");
+        
+        ButtonType confirmButton = new ButtonType("হ্যাঁ, বিক্রয় করুন");
+        ButtonType cancelButton = new ButtonType("না, বাতিল করুন");
+        alert.getButtonTypes().setAll(confirmButton, cancelButton);
+        
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("nord-dark.css")).toExternalForm());
+        
+        alert.showAndWait().ifPresent(response -> {
+            if (response == confirmButton) {
+                Player player = sellTable.getSelectionModel().getSelectedItem();
                 try {
-                    loadClubPlayers(this.clubName);
-                    loadSoldPlayers();
+                    clubManagementClient.getSocketWrapper().write("SELL_PLAYER, " + player.getName());
+                    System.out.println("SELL PLAYER, " + player.getName() + " MESSAGE SENT"); //Debug message
+                    Platform.runLater(() -> {
+                        try {
+                            loadClubPlayers(this.clubName);
+                            loadSoldPlayers();
+                        } catch (IOException e) {
+                            System.err.println("Error: Could not refresh tables. " + e.getMessage());
+                        }
+                    });
                 } catch (IOException e) {
-                    System.err.println("Error: Could not refresh tables. " + e.getMessage());
+                    System.err.println("Error: Could not write to socket. " + e.getMessage());
                 }
-            });
-        } catch (IOException e) {
-            System.err.println("Error: Could not write to socket. " + e.getMessage());
-        }
+            }
+        });
+    }
+    
+    @FXML
+    private void buyPlayer(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Purchase");
+        alert.setHeaderText("ক্রয় নিশ্চিত করুন");
+        alert.setContentText("আপনি কি " + buyTable.getSelectionModel().getSelectedItem().getName() + " কে ক্রয় করতে চান?");
+        
+        ButtonType confirmButton = new ButtonType("হ্যাঁ, ক্রয় করুন");
+        ButtonType cancelButton = new ButtonType("না, বাতিল করুন");
+        alert.getButtonTypes().setAll(confirmButton, cancelButton);
+        
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("nord-dark.css")).toExternalForm());
+        
+        alert.showAndWait().ifPresent(response -> {
+            if (response == confirmButton) {
+                Player player = buyTable.getSelectionModel().getSelectedItem();
+                try {
+                    clubManagementClient.getSocketWrapper().write("BUY_PLAYER, " + player.getName() + ", " + clubName);
+                    System.out.println("BUY PLAYER, " + player.getName() + ", " + clubName + " MESSAGE SENT"); //Debug message
+                    Platform.runLater(() -> {
+                        try {
+                            loadClubPlayers(this.clubName);
+                            loadSoldPlayers();
+                        } catch (IOException e) {
+                            System.err.println("Error: Could not refresh tables. " + e.getMessage());
+                        }
+                    });
+                } catch (IOException e) {
+                    System.err.println("Error: Could not write to socket. " + e.getMessage());
+                }
+            }
+        });
     }
     
     private void loadSoldPlayers() throws IOException {
-        clubManagementClient.getSocketWrapper().write("REQUEST_ALL_PLAYERS_LIST");
-        
         List<Player> soldPlayers = new ArrayList<>();
         for (Player p : clubManagementClient.getAllPlayers()) {
             if (p.getClub().equals("MARKETPLACE")) {
@@ -116,8 +194,6 @@ public class ClubManagementHomepage {
     }
     
     private void loadClubPlayers(String clubName) throws IOException {
-        clubManagementClient.getSocketWrapper().write("REQUEST_ALL_PLAYERS_LIST");
-        
         List<Player> players = new ArrayList<>();
         for (Player player : clubManagementClient.getAllPlayers()) {
             if (player.getClub().trim().equals(clubName)) {
@@ -156,17 +232,7 @@ public class ClubManagementHomepage {
         stage.show();
     }
     
-    @FXML
-    private void buyPlayer(ActionEvent actionEvent) throws IOException {
-        Player player = buyTable.getSelectionModel().getSelectedItem();
-        for (Player p : clubManagementClient.getAllPlayers()) {
-            if (p.getName().equals(player.getName())) {
-                buyTable.getItems().remove(buyTable.getSelectionModel().getSelectedIndex());
-                p.setClub(clubName);
-                break;
-            }
-        }
-        loadClubPlayers(this.clubName);
-        loadSoldPlayers();
+    public void handleRefresh(ActionEvent actionEvent) throws IOException {
+        clubManagementClient.getSocketWrapper().write("CLIENT: REQUESTED_REFRESH");
     }
 }
